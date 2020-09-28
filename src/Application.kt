@@ -1,16 +1,10 @@
 package dev.hikari
 
-import io.ktor.application.Application
-import io.ktor.application.call
-import io.ktor.html.respondHtml
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpStatusCode
-import io.ktor.response.header
-import io.ktor.response.respond
-import io.ktor.response.respondFile
-import io.ktor.routing.get
-import io.ktor.routing.route
-import io.ktor.routing.routing
+import io.ktor.application.*
+import io.ktor.html.*
+import io.ktor.http.*
+import io.ktor.response.*
+import io.ktor.routing.*
 import kotlinx.html.a
 import kotlinx.html.body
 import kotlinx.html.li
@@ -32,7 +26,7 @@ fun Application.module(testing: Boolean = false) {
     routing {
         route("/pan") {
             get {
-                val files = panDir.listFiles()!!.toList()
+                val files = panDir.listFiles()?.toList() ?: emptyList()
                 call.respondHtml {
                     body {
                         ul {
